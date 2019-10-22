@@ -1,0 +1,7 @@
+void f() {
+    write "hehehehaha"
+}
+
+int g() {
+    write f();
+}

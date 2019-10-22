@@ -1,0 +1,9 @@
+bool f() {
+    int a;
+    a = 5;
+    return a == g();
+}
+
+void g() {
+    return;
+}

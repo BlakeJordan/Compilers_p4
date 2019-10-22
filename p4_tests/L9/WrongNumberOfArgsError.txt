@@ -1,0 +1,7 @@
+int f(int a) {
+    write "hehehe"
+}
+
+int g() {
+    f(12, 4);
+}

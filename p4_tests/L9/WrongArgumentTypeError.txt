@@ -1,0 +1,12 @@
+int f(bool b) {
+    write "hehehe"
+}
+
+int x(int a) {
+    write "hahahaha"
+}
+
+int g() {
+    f(12);
+    x(true);
+}

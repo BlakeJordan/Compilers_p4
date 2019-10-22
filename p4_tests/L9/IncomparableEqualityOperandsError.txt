@@ -1,0 +1,7 @@
+bool f() {
+    int a;
+    bool b;
+    a = 5;
+    b = false;
+    return a == b;
+}

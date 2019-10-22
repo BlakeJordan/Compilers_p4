@@ -1,0 +1,5 @@
+int f() {
+    while(5) {
+        write "AHHH";
+    }
+}

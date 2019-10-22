@@ -1,0 +1,7 @@
+int f() {
+    int a;
+    a = 5;
+    if (a) {
+        return 5;
+    }
+}

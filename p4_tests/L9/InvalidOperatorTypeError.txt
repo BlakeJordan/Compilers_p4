@@ -1,0 +1,7 @@
+int f() {
+    bool b;
+    bool a;
+    a = true;
+    b = false;
+    return a + b;
+}
