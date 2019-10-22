@@ -1,0 +1,5 @@
+int a;
+bool b;
+void fn(){
+	a = b;
+}
