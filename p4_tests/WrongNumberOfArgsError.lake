@@ -1,5 +1,5 @@
 int f(int a) {
-    write "hehehe"
+    write "hehehe";
 }
 
 int g() {

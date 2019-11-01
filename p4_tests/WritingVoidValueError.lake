@@ -1,5 +1,5 @@
 void f() {
-    write "hehehehaha"
+    write "hehehehaha";
 }
 
 int g() {

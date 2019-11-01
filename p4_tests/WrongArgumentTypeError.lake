@@ -1,9 +1,9 @@
 int f(bool b) {
-    write "hehehe"
+    write "hehehe";
 }
 
 int x(int a) {
-    write "hahahaha"
+    write "hahahaha";
 }
 
 int g() {

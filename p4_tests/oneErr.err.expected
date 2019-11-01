@@ -1,2 +1,2 @@
-4,1: Type mismatch
-Type Analysis Error
+4,4: Invalid assignment operation
+Type checking failed

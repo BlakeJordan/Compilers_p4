@@ -1,12 +1,12 @@
-int f() {
-    a = b;
-    return a;
-}
-
 int a() {
     return 5;
 }
 
 int b() {
     return 6;
+}
+
+int f() {
+    a = b;
+    return a;
 }

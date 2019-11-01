@@ -5,6 +5,11 @@
 
 namespace lake{
 
+	// A good way to implement your type checker is by writing member functions for 
+	// the different subclasses of ASTNode. Your type checker should find all of the
+	// type errors described in the table of the project spec. Your type checker must
+	// report the specified position of the error, and it must give the specified error message. 
+
 void ProgramNode::typeAnalysis(TypeAnalysis * ta){
 
 	//pass the TypeAnalysis down throughout
