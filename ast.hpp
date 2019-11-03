@@ -133,7 +133,7 @@ class StmtNode : public ASTNode{
 public:
 	StmtNode(size_t lIn, size_t cIn) : ASTNode(lIn, cIn){ }
 	virtual void unparse(std::ostream& out, int indent) override = 0;
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	virtual void typeAnalysis(TypeAnalysis * ta, FnType * fnType);
 };
 
 class DeclNode : public ASTNode{
@@ -203,7 +203,7 @@ public:
 	}
 	void unparse(std::ostream& out, int indent) override;
 	virtual bool nameAnalysis(SymbolTable * symTab) override;
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	virtual void typeAnalysis(TypeAnalysis * ta, FnType * fnType);
 private:
 	std::list<StmtNode *> * myStmts;
 };
@@ -217,7 +217,7 @@ public:
 	}
 	void unparse(std::ostream& out, int indent) override;
 	bool nameAnalysis(SymbolTable * symTab) override;
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	virtual void typeAnalysis(TypeAnalysis * ta, FnType * fnDeclType);
 private:
 	StmtListNode * myStmtList;
 	VarDeclListNode * myVarDecls;

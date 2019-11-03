@@ -72,34 +72,32 @@ void FnDeclNode::typeAnalysis(TypeAnalysis * ta){
 	// function. This will help you to know at a 
 	// return statement whether the return type matches
 	// the current function
-
-	//Note, this function may need extra code
-
-	return myBody->typeAnalysis(ta);
+	
+	return myBody->typeAnalysis(ta, myType);
 }
 
-void FnBodyNode::typeAnalysis(TypeAnalysis * ta){
+void FnBodyNode::typeAnalysis(TypeAnalysis * ta, FnType * fnDeclType) {
 	//HINT: as above, you may want to pass the 
 	// fnDecl's type into the statement list as a 
 	// second argument to StmtList::typeAnalysis
 
 	//Note, this function may need extra code
-
-	return myStmtList->typeAnalysis(ta);
+	
+	return myStmtList->typeAnalysis(ta, fnDeclType);
 }
 
-void StmtListNode::typeAnalysis(TypeAnalysis * ta){
+void StmtListNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType){
 	//Note, this function may need extra code
-	for (auto stmt : *myStmts){
-		stmt->typeAnalysis(ta);
+	for (auto stmt : *myStmts) {
+		stmt->typeAnalysis(ta, fnType);
 	}
 }
 
-void StmtNode::typeAnalysis(TypeAnalysis * ta){
+void StmtNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
 	TODO("Implement me in the subclass");
 }
 
-void AssignStmtNode::typeAnalysis(TypeAnalysis * ta){
+void AssignStmtNode::typeAnalysis(TypeAnalysis * ta) {
 
 	myAssign->typeAnalysis(ta);
 
