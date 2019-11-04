@@ -416,6 +416,7 @@ public:
 		ExpNode * exp1, ExpNode * exp2) 
 	: BinaryExpNode(lIn, cIn, exp1, exp2) { }
 	virtual std::string myOp() override { return "+"; } 
+	void typeAnalysis(TypeAnalysis * ta);
 };
 
 class MinusNode : public BinaryExpNode{
