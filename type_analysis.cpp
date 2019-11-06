@@ -239,9 +239,9 @@ namespace lake{
 		ta->nodeType(this, VarType::produce(BOOL));
 	}
 
-	void StrLitNode::typeAnalysis(TypeAnalysis * ta) {
-		ta->nodeType(this, VarType::produce(VOID));
-	}
+	// void StrLitNode::typeAnalysis(TypeAnalysis * ta) {
+	// 	ta->nodeType(this, VarType::produce(VOID));
+	// }
 
 	void PlusNode::typeAnalysis(TypeAnalysis * ta) {
 		myExp1->typeAnalysis(ta);

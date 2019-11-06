@@ -316,7 +316,7 @@ public:
 	bool nameAnalysis(SymbolTable *) override { 
 		return true; 
 	}
-	void typeAnalysis(TypeAnalysis * ta);
+	// void typeAnalysis(TypeAnalysis * ta);
 private:
 	 std::string myString;
 };
