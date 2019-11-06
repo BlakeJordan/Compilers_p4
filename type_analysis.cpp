@@ -77,7 +77,6 @@ namespace lake{
 		// return statement whether the return type matches
 		// the current function
 
-
 		myFormals->typeAnalysis(ta);
 		myBody->typeAnalysis(ta, myType);
 
@@ -184,7 +183,7 @@ namespace lake{
 			// type must be done
 			ta->nodeType(this, ErrorType::produce());
 		} else {
-			ta->nodeType(this, VarType::produce(tgtType->getString));
+			ta->nodeType(this, tgtType);
 			return;
 		}
 	}
@@ -474,7 +473,7 @@ namespace lake{
 
 		if(type->asError()) {
 			ta->nodeType(this, ErrorType::produce());
-		} else if(!type->isBool) {
+		} else if(!type->isBool()) {
 			ta->badLogicOpd(myExp->getLine(), myExp->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
@@ -519,7 +518,7 @@ namespace lake{
 
 		if(type->asError()) {
 			ta->nodeType(this, ErrorType::produce());
-		} else if(type->isPtr) {
+		} else if(type->isPtr()) {
 			ta->badReadPtr(myExp->getLine(), myExp->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else if(type->asFn()) {
@@ -537,10 +536,10 @@ namespace lake{
 
 		if(type->asError()) {
 			ta->nodeType(this, ErrorType::produce());
-		} else if(type->isPtr) {
+		} else if(type->isPtr()) {
 			ta->writePtr(myExp->getLine(), myExp->getCol());
 			ta->nodeType(this, ErrorType::produce());
-		} else if(type->isVoid) {
+		} else if(type->isVoid()) {
 			ta->badWriteVoid(myExp->getLine(), myExp->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else if(type->asFn()) {
@@ -562,7 +561,7 @@ namespace lake{
 
 		if(condType->asError() || myStmtsType->asError() || myDeclsType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
-		} else if(condType->isBool) {
+		} else if(condType->isBool()) {
 			ta->badIfCond(myExp->getLine(), myExp->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
@@ -587,7 +586,7 @@ namespace lake{
 			myStmtsTypeF->asError() || myDeclsTypeF->asError()
 			|| myDeclsTypeT->asError()) {
 			ta->nodeType(this, ErrorType::produce());
-		} else if(condType->isBool) {
+		} else if(condType->isBool()) {
 			ta->badIfCond(myExp->getLine(), myExp->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
@@ -606,7 +605,7 @@ namespace lake{
 
 		if(condType->asError() || myStmtsType->asError() || myDeclsType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
-		} else if(condType->isBool) {
+		} else if(condType->isBool()) {
 			ta->badWhileCond(myExp->getLine(), myExp->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
@@ -620,6 +619,30 @@ namespace lake{
 		const DataType * type = ta->nodeType(myCallExp);
 
 		ta->nodeType(this, type);
+	}
+
+	void CallExpNode::typeAnalysis(TypeAnalysis * ta) {
+		myExpList->typeAnalysis(ta);
+		const DataType * type = ta->nodeType(myExpList);
+		if(type->asError()) {
+			ta->nodeType(this, ErrorType::produce());
+		} else {
+			ta->nodeType(this, type);
+		}
+	}
+
+	void ExpListNode::typeAnalysis(TypeAnalysis * ta) {
+		ta->nodeType(this, VarType::produce(VOID));
+
+		for(auto exp : *myExps) {
+			exp->typeAnalysis(ta);
+
+			const DataType * type = ta->nodeType(exp);
+
+			if(type->asError()) {
+				ta->nodeType(this, ErrorType::produce());
+			}
+		}
 	}
 
 	void ReturnStmtNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
