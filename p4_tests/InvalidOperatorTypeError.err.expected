@@ -1,3 +1,4 @@
-6,12: Arithmetic operator applied to invalid operand
-6,16: Arithmetic operator applied to invalid operand
+7,9: Arithmetic operator applied to invalid operand
+7,13: Arithmetic operator applied to invalid operand
+8,12: Bad return value
 Type checking failed

@@ -1,1 +1,4 @@
-Compiler is Broken! No type for node 
+7,11: Arithmetic operator applied to incompatible operands
+7,7: Invalid assignment operation
+8,5: Bad return value
+Type checking failed

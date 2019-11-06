@@ -68,6 +68,7 @@ public:
 	virtual void setPtrDepth(size_t depth); 
 	virtual size_t getPtrDepth(){ return myPtrDepth; }
 	virtual void printIndirection(std::ostream& out);
+	virtual void typeAnalysis(TypeAnalysis * ta);
 private:
 	size_t myPtrDepth;
 };
@@ -276,7 +277,7 @@ public:
 	: TypeNode(lIn, cIn) { }
 	void unparse(std::ostream& out, int indent) override;
 	virtual const DataType * getDataType() override;
-	void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta) override;
 };
 
 class VoidNode : public TypeNode{
@@ -285,7 +286,7 @@ public:
 	: TypeNode(lIn, cIn){}
 	virtual const DataType * getDataType() override;
 	void unparse(std::ostream& out, int indent) override;
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta) override;
 };
 
 class IntLitNode : public ExpNode{
@@ -301,7 +302,7 @@ public:
 		}
 		return true; 
 	}
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta) override;
 private:
 	int myInt;
 };
@@ -316,7 +317,7 @@ public:
 	bool nameAnalysis(SymbolTable *) override { 
 		return true; 
 	}
-	// void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta);
 private:
 	 std::string myString;
 };
@@ -428,7 +429,7 @@ public:
 		ExpNode * exp1, ExpNode * exp2) 
 	: BinaryExpNode(lIn, cIn, exp1, exp2) { }
 	virtual std::string myOp() override { return "+"; }
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta) override;
 };
 
 class MinusNode : public BinaryExpNode{
@@ -437,7 +438,7 @@ public:
 		ExpNode * exp1, ExpNode * exp2)
 	: BinaryExpNode(lIn, cIn, exp1, exp2){ }
 	virtual std::string myOp() override { return "-"; }
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta) override;
 };
 
 class TimesNode : public BinaryExpNode{
@@ -446,7 +447,7 @@ public:
 		ExpNode * exp1, ExpNode * exp2)
 	: BinaryExpNode(lIn, cIn, exp1, exp2){ }
 	virtual std::string myOp() override { return "*"; }
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta) override;
 };
 
 class DivideNode : public BinaryExpNode{
@@ -455,7 +456,7 @@ public:
 		ExpNode * exp1, ExpNode * exp2)
 	: BinaryExpNode(lIn, cIn, exp1, exp2){ }
 	virtual std::string myOp() override { return "/"; }
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta) override;
 };
 
 class AndNode : public BinaryExpNode{
@@ -464,7 +465,7 @@ public:
 		ExpNode * exp1, ExpNode * exp2)
 	: BinaryExpNode(lIn, cIn, exp1, exp2){ }
 	virtual std::string myOp() override { return " and "; }
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta) override;
 };
 
 class OrNode : public BinaryExpNode{
@@ -473,7 +474,7 @@ public:
 		ExpNode * exp1, ExpNode * exp2)
 	: BinaryExpNode(lIn, cIn, exp1, exp2){ }
 	virtual std::string myOp() override { return " or "; }
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta) override;
 };
 
 class EqualsNode : public BinaryExpNode{
@@ -482,7 +483,7 @@ public:
 		ExpNode * exp1, ExpNode * exp2)
 	: BinaryExpNode(lineIn, colIn, exp1, exp2){ }
 	virtual std::string myOp() override { return "=="; }
-	virtual void typeAnalysis(TypeAnalysis * ta); 
+	void typeAnalysis(TypeAnalysis * ta) override; 
 };
 
 class NotEqualsNode : public BinaryExpNode{
@@ -491,7 +492,7 @@ public:
 		ExpNode * exp1, ExpNode * exp2)
 	: BinaryExpNode(lineIn, colIn, exp1, exp2){ }
 	virtual std::string myOp() override { return "!="; } 
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta) override;
 	
 };
 
@@ -501,7 +502,7 @@ public:
 		ExpNode * exp1, ExpNode * exp2)
 	: BinaryExpNode(lineIn, colIn, exp1, exp2){ }
 	virtual std::string myOp() override { return "<"; }
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta) override;
 };
 
 class GreaterNode : public BinaryExpNode{
@@ -510,7 +511,7 @@ public:
 		ExpNode * exp1, ExpNode * exp2)
 	: BinaryExpNode(lineIn, colIn, exp1, exp2){ }
 	virtual std::string myOp() override { return ">"; }
-	virtual void typeAnalysis(TypeAnalysis * ta); 
+	void typeAnalysis(TypeAnalysis * ta) override; 
 };
 
 class LessEqNode : public BinaryExpNode{
@@ -519,7 +520,7 @@ public:
 		ExpNode * exp1, ExpNode * exp2)
 	: BinaryExpNode(lineIn, colIn, exp1, exp2){ }
 	virtual std::string myOp() override { return "<="; } 
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta) override;
 };
 
 class GreaterEqNode : public BinaryExpNode{
@@ -528,7 +529,7 @@ public:
 		ExpNode * exp1, ExpNode * exp2)
 	: BinaryExpNode(lineIn, colIn, exp1, exp2){ }
 	virtual std::string myOp() override { return ">="; } 
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta) override;
 };
 
 class AssignStmtNode : public StmtNode{
@@ -539,7 +540,7 @@ public:
 	}
 	void unparse(std::ostream& out, int indent) override;
 	bool nameAnalysis(SymbolTable * symTab) override;
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta, FnType * fnType) override;
 private:
 	AssignNode * myAssign;
 };
@@ -555,7 +556,7 @@ public:
 	}
 	void unparse(std::ostream& out, int indent) override;
 	bool nameAnalysis(SymbolTable * symTab) override;
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	virtual void typeAnalysis(TypeAnalysis * ta, FnType * fnType) override;
 private:
 	ExpNode * myExp;
 };
@@ -568,7 +569,7 @@ public:
 	}
 	void unparse(std::ostream& out, int indent) override;
 	bool nameAnalysis(SymbolTable * symTab) override;
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	virtual void typeAnalysis(TypeAnalysis * ta, FnType * fnType) override;
 private:
 	ExpNode * myExp;
 };
@@ -581,7 +582,7 @@ public:
 	}
 	void unparse(std::ostream& out, int indent) override;
 	bool nameAnalysis(SymbolTable * symTab) override;
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta, FnType * fnType) override;
 private:
 	ExpNode * myExp;
 };
@@ -594,7 +595,7 @@ public:
 	}
 	void unparse(std::ostream& out, int indent) override;
 	bool nameAnalysis(SymbolTable * symTab) override;
-	virtual void typeAnalysis(TypeAnalysis * ta);
+	void typeAnalysis(TypeAnalysis * ta, FnType * fnType) override;
 private:
 	ExpNode * myExp;
 };

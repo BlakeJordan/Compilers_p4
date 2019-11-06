@@ -11,6 +11,7 @@ namespace lake{
 		// report the specified position of the error, and it must give the specified error message. 
 
 	void ProgramNode::typeAnalysis(TypeAnalysis * ta){
+		ta->nodeType(this, VarType::produce(VOID));
 
 		//pass the TypeAnalysis down throughout
 		// the entire tree, getting the types for
@@ -43,7 +44,6 @@ namespace lake{
 	}
 
 	void DeclListNode::typeAnalysis(TypeAnalysis * ta){
-		
 		ta->nodeType(this, VarType::produce(VOID));
 
 		for (auto decl : *myDecls){
@@ -64,11 +64,19 @@ namespace lake{
 		return;
 	}
 
-	void FormalsListNode::typeAnalysis(TypeAnalysis * ta) {
+	void FormalsListNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		ta->nodeType(this, getDeclaredType());
 	}
 
+	void TypeNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
+		std::cout<<"\n\nFUCK\n\n";
+		ta->nodeType(this, getDataType());
+	}
+
 	void FnDeclNode::typeAnalysis(TypeAnalysis * ta){
+		ta->nodeType(this, VarType::produce(VOID));
 
 		//HINT: you might want to change the signature for
 		// typeAnalysis on FnBodyNode to take a second
@@ -82,18 +90,23 @@ namespace lake{
 
 		auto formalsType = ta->nodeType(myFormals);
 		auto bodyType = ta->nodeType(myBody);
-
+		
 		if (formalsType->asError() || bodyType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
+		} else {
+			ta->nodeType(this, getDeclaredType());	
 		}
 	}
 
 	void FnBodyNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
+		ta->nodeType(this, VarType::produce(VOID));
+
 		//HINT: as above, you may want to pass the 
 		// fnDecl's type into the statement list as a 
 		// second argument to StmtList::typeAnalysis
 
 		//Note, this function may need extra code
+
 
 		myVarDecls->typeAnalysis(ta);
 		myStmtList->typeAnalysis(ta, fnType);
@@ -104,33 +117,40 @@ namespace lake{
 		if(varDeclsType->asError() || myStmtListType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		}
-
-		ta->nodeType(this, myStmtListType);
 	}
 
-	void VarDeclListNode::typeAnalysis(TypeAnalysis * ta) {
+	void VarDeclListNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		for (auto varDecl : *myDecls) {
 			varDecl->typeAnalysis(ta);
 		}
 	}
 
 	void StmtListNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType){
+
 		//Note, this function may need extra code
+
+		ta->nodeType(this, VarType::produce(VOID));
 		for (auto stmt : *myStmts) {
 			stmt->typeAnalysis(ta, fnType);
+
 			auto stmtType = ta->nodeType(stmt);
+
 			if(stmtType->asError()) {
 				ta->nodeType(this, ErrorType::produce());
 			}
 		}
-		ta->nodeType(this, VarType::produce(VOID));
 	}
 
 	void StmtNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
+		ta->nodeType(this, VarType::produce(VOID));
+
 		TODO("Implement me in the subclass");
 	}
 
-	void AssignStmtNode::typeAnalysis(TypeAnalysis * ta) {
+	void AssignStmtNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
+		ta->nodeType(this, VarType::produce(VOID));
+
 
 		myAssign->typeAnalysis(ta);
 
@@ -149,10 +169,14 @@ namespace lake{
 	}
 
 	void ExpNode::typeAnalysis(TypeAnalysis * ta){
+		ta->nodeType(this, VarType::produce(VOID));
+
 		TODO("Override me in the subclass");
 	}
 
 	void AssignNode::typeAnalysis(TypeAnalysis * ta){
+		ta->nodeType(this, VarType::produce(VOID));
+
 		//TODO: Note that this function is incomplete. 
 		// and needs additional code
 
@@ -189,10 +213,14 @@ namespace lake{
 	}
 
 	void DeclNode::typeAnalysis(TypeAnalysis * ta){
+		ta->nodeType(this, VarType::produce(VOID));
+
 		TODO("Override me in the subclass");
 	}
 
 	void VarDeclNode::typeAnalysis(TypeAnalysis * ta){
+		ta->nodeType(this, VarType::produce(VOID));
+
 		// VarDecls always pass type analysis, since they 
 		// are never used in an expression. You may choose
 		// to type them void (like this).
@@ -203,47 +231,59 @@ namespace lake{
 		// the type of the symbol it declares (this works
 		// because it's type was attached during 
 		// nameAnalysis)
-		ta->nodeType(this, myID->getSymbol()->getType());
+		// ta->nodeType(this, myID->getSymbol()->getType());
 	}
 
 	void IdNode::typeAnalysis(TypeAnalysis * ta){
+		ta->nodeType(this, VarType::produce(VOID));
+
 		// IDs never fail type analysis and always
 		// yield the type of their symbol (which
 		// depends on their definition)
 		ta->nodeType(this, this->getSymbol()->getType());
 	}
 
-	void IntNode::typeAnalysis(TypeAnalysis * ta) {
+	void IntNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
+		std::cout<<"\n\nFUCK\n\n";
 		ta->nodeType(this, VarType::produce(INT));
 	}
 
 	void IntLitNode::typeAnalysis(TypeAnalysis * ta){
+		ta->nodeType(this, VarType::produce(VOID));
+
 		// IntLits never fail their type analysis and always
 		// yield the type INT
 		ta->nodeType(this, VarType::produce(INT));
 	}
 
-	void BoolNode::typeAnalysis(TypeAnalysis * ta) {
+	void BoolNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		ta->nodeType(this, VarType::produce(BOOL));
 	}
 
-	void VoidNode::typeAnalysis(TypeAnalysis * ta) {
+	void VoidNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		ta->nodeType(this, VarType::produce(VOID));
 	}
 
-	void FalseNode::typeAnalysis(TypeAnalysis * ta) {
+	void FalseNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		ta->nodeType(this, VarType::produce(BOOL));
 	}
 
-	void TrueNode::typeAnalysis(TypeAnalysis * ta) {
+	void TrueNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		ta->nodeType(this, VarType::produce(BOOL));
 	}
 
-	// void StrLitNode::typeAnalysis(TypeAnalysis * ta) {
-	// 	ta->nodeType(this, VarType::produce(VOID));
-	// }
+	void StrLitNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
+		ta->nodeType(this, VarType::produce(VOID));
+	}
 
-	void PlusNode::typeAnalysis(TypeAnalysis * ta) {
+	void PlusNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		myExp1->typeAnalysis(ta);
 		myExp2->typeAnalysis(ta);
 
@@ -263,8 +303,9 @@ namespace lake{
 		}
 	}
 
-	void MinusNode::typeAnalysis(TypeAnalysis * ta)
-	{
+	void MinusNode::typeAnalysis(TypeAnalysis * ta) {
+		ta->nodeType(this, VarType::produce(VOID));
+
 		myExp1->typeAnalysis(ta);
 		myExp2->typeAnalysis(ta);
 
@@ -284,7 +325,8 @@ namespace lake{
 		}
 	}
 
-	void TimesNode::typeAnalysis(TypeAnalysis * ta) {
+	void TimesNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		myExp1->typeAnalysis(ta);
 		myExp2->typeAnalysis(ta);
 
@@ -304,7 +346,8 @@ namespace lake{
 		}
 	}
 
-	void DivideNode::typeAnalysis(TypeAnalysis * ta) {
+	void DivideNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		myExp1->typeAnalysis(ta);
 		myExp2->typeAnalysis(ta);
 
@@ -324,7 +367,8 @@ namespace lake{
 		}
 	}
 
-	void AndNode::typeAnalysis(TypeAnalysis * ta) {
+	void AndNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		myExp1->typeAnalysis(ta);
 		myExp2->typeAnalysis(ta);
 
@@ -341,7 +385,8 @@ namespace lake{
 		}
 	}
 
-	void OrNode::typeAnalysis(TypeAnalysis * ta) {
+	void OrNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		myExp1->typeAnalysis(ta);
 		myExp2->typeAnalysis(ta);
 
@@ -358,7 +403,8 @@ namespace lake{
 		}
 	}
 
-	void EqualsNode::typeAnalysis(TypeAnalysis * ta) {
+	void EqualsNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		myExp1->typeAnalysis(ta);
 		myExp2->typeAnalysis(ta);
 
@@ -378,7 +424,8 @@ namespace lake{
 		}
 	}
 
-	void NotEqualsNode::typeAnalysis(TypeAnalysis * ta) {
+	void NotEqualsNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		myExp1->typeAnalysis(ta);
 		myExp2->typeAnalysis(ta);
 
@@ -398,7 +445,8 @@ namespace lake{
 		}
 	}
 
-	void LessNode::typeAnalysis(TypeAnalysis * ta) {
+	void LessNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		myExp1->typeAnalysis(ta);
 		myExp2->typeAnalysis(ta);
 
@@ -415,7 +463,8 @@ namespace lake{
 		}
 	}
 
-	void GreaterNode::typeAnalysis(TypeAnalysis * ta) {
+	void GreaterNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		myExp1->typeAnalysis(ta);
 		myExp2->typeAnalysis(ta);
 
@@ -432,7 +481,8 @@ namespace lake{
 		}
 	}
 
-	void LessEqNode::typeAnalysis(TypeAnalysis * ta) {
+	void LessEqNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		myExp1->typeAnalysis(ta);
 		myExp2->typeAnalysis(ta);
 
@@ -449,7 +499,8 @@ namespace lake{
 		}
 	}
 
-	void GreaterEqNode::typeAnalysis(TypeAnalysis * ta) {
+	void GreaterEqNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		myExp1->typeAnalysis(ta);
 		myExp2->typeAnalysis(ta);
 
@@ -466,7 +517,8 @@ namespace lake{
 		}
 	}
 
-	void NotNode::typeAnalysis(TypeAnalysis * ta) {
+	void NotNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		myExp->typeAnalysis(ta);
 
 		const DataType * type = ta->nodeType(myExp);
@@ -481,7 +533,9 @@ namespace lake{
 		}
 	}
 
-	void PostDecStmtNode::typeAnalysis(TypeAnalysis * ta) {
+	void PostDecStmtNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
+		ta->nodeType(this, VarType::produce(VOID));
+
 		myExp->typeAnalysis(ta);
 
 		const DataType * type = ta->nodeType(myExp);
@@ -496,7 +550,9 @@ namespace lake{
 		}
 	}
 
-	void PostIncStmtNode::typeAnalysis(TypeAnalysis * ta) {
+	void PostIncStmtNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
+		ta->nodeType(this, VarType::produce(VOID));
+
 		myExp->typeAnalysis(ta);
 
 		const DataType * type = ta->nodeType(myExp);
@@ -511,7 +567,9 @@ namespace lake{
 		}
 	}
 
-	void ReadStmtNode::typeAnalysis(TypeAnalysis * ta) {
+	void ReadStmtNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
+		ta->nodeType(this, VarType::produce(VOID));
+
 		myExp->typeAnalysis(ta);
 
 		const DataType * type = ta->nodeType(myExp);
@@ -529,7 +587,9 @@ namespace lake{
 		}
 	}
 
-	void WriteStmtNode::typeAnalysis(TypeAnalysis * ta) {
+	void WriteStmtNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
+		ta->nodeType(this, VarType::produce(VOID));
+
 		myExp->typeAnalysis(ta);
 
 		const DataType * type = ta->nodeType(myExp);
@@ -551,6 +611,8 @@ namespace lake{
 	}
 
 	void IfStmtNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
+		ta->nodeType(this, VarType::produce(VOID));
+
 		myExp->typeAnalysis(ta);
 		myStmts->typeAnalysis(ta, fnType);
 		myDecls->typeAnalysis(ta);
@@ -570,6 +632,8 @@ namespace lake{
 	}
 
 	void IfElseStmtNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
+		ta->nodeType(this, VarType::produce(VOID));
+
 		myExp->typeAnalysis(ta);
 		myStmtsT->typeAnalysis(ta, fnType);
 		myDeclsT->typeAnalysis(ta);
@@ -595,6 +659,8 @@ namespace lake{
 	}
 
 	void WhileStmtNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
+		ta->nodeType(this, VarType::produce(VOID));
+
 		myExp->typeAnalysis(ta);
 		myStmts->typeAnalysis(ta, fnType);
 		myDecls->typeAnalysis(ta);
@@ -614,6 +680,8 @@ namespace lake{
 	}
 
 	void CallStmtNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
+		ta->nodeType(this, VarType::produce(VOID));
+
 		myCallExp->typeAnalysis(ta);
 
 		const DataType * type = ta->nodeType(myCallExp);
@@ -621,31 +689,55 @@ namespace lake{
 		ta->nodeType(this, type);
 	}
 
-	void CallExpNode::typeAnalysis(TypeAnalysis * ta) {
+	void CallExpNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
+		myId->typeAnalysis(ta);
 		myExpList->typeAnalysis(ta);
-		const DataType * type = ta->nodeType(myExpList);
-		if(type->asError()) {
+
+		auto idType = ta->nodeType(myId);
+		auto fnType = myId->getSymbol()->getType()->asFn();
+		auto expListType = ta->nodeType(myExpList);
+		auto type = ta->nodeType(myExpList);
+		int actualsSize = expListType->asTuple()->getElts()->size();
+		int formalsSize = fnType->getFormalTypes()->getElts()->size();
+		std::string actuals = expListType->asTuple()->getString();
+		std::string formals = fnType->getFormalTypes()->getString();
+
+		if(type->asError() || idType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
-		} else {
+		} else if(actualsSize != formalsSize) {
+			ta->badArgCount(this->getLine(), this->getCol());
+			ta->nodeType(this, ErrorType::produce());
+		} else if(actuals != formals) {
+			ta->badArgMatch(this->getLine(), this->getCol());
+			ta->nodeType(this, ErrorType::produce());
+		} else if(idType->asFn()) {
 			ta->nodeType(this, type);
+		} else {
+			ta->badCallee(this->getLine(), this->getCol());
+			ta->nodeType(this, ErrorType::produce());
 		}
 	}
 
-	void ExpListNode::typeAnalysis(TypeAnalysis * ta) {
+	void ExpListNode::typeAnalysis(TypeAnalysis * ta) { 
 		ta->nodeType(this, VarType::produce(VOID));
-
-		for(auto exp : *myExps) {
+		std::list<const DataType *> * expTypes = new std::list<const DataType *>();
+		for(auto exp : *myExps){
 			exp->typeAnalysis(ta);
-
-			const DataType * type = ta->nodeType(exp);
-
-			if(type->asError()) {
+			const DataType * expType = ta->nodeType(exp);
+			if(expType->asError()){
 				ta->nodeType(this, ErrorType::produce());
+			} else {
+				expTypes->push_back(expType);
 			}
 		}
+		TupleType * expList = new TupleType(expTypes);
+		ta->nodeType(this, expList);
 	}
 
 	void ReturnStmtNode::typeAnalysis(TypeAnalysis * ta, FnType * fnType) {
+		ta->nodeType(this, VarType::produce(VOID));
+
 		myExp->typeAnalysis(ta);
 
 		const DataType * type = ta->nodeType(myExp);
@@ -665,10 +757,10 @@ namespace lake{
 		} else {
 			ta->nodeType(this, type);
 		}
-
 	}
 
-	void DerefNode::typeAnalysis(TypeAnalysis * ta) {
+	void DerefNode::typeAnalysis(TypeAnalysis * ta) { 
+		ta->nodeType(this, VarType::produce(VOID));
 		myTgt->typeAnalysis(ta);
 	}
 }
