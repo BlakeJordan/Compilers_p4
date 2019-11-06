@@ -653,10 +653,10 @@ namespace lake{
 
 		if(type->asError()) {
 			ta->nodeType(this, ErrorType::produce());
-		} else if(retType->isVoid() && !type->isVoid) {
+		} else if(retType->isVoid() && !type->isVoid()) {
 			ta->extraRetValue(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
-		} else if(!retType->isVoid() && type->isVoid) {
+		} else if(!retType->isVoid() && type->isVoid()) {
 			ta->badNoRet(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else if(type != retType) {
