@@ -253,10 +253,10 @@ namespace lake{
 		if(lType->asError() || rType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isInt() && !rType->isInt()) {
-			ta->badMathOpr(myExp1->getLine(), myExp1->getCol());
+			ta->badMathOpr(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isInt() || !rType->isInt()) {
-			ta->badMathOpd(myExp1->getLine(), myExp1->getCol());
+			ta->badMathOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(INT));
@@ -274,10 +274,10 @@ namespace lake{
 		if(lType->asError() || rType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isInt() && !rType->isInt()) {
-			ta->badMathOpr(myExp1->getLine(), myExp1->getCol());
+			ta->badMathOpr(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isInt() || !rType->isInt()) {
-			ta->badMathOpd(myExp1->getLine(), myExp1->getCol());
+			ta->badMathOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(INT));
@@ -294,10 +294,10 @@ namespace lake{
 		if(lType->asError() || rType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isInt() && !rType->isInt()) {
-			ta->badMathOpr(myExp1->getLine(), myExp1->getCol());
+			ta->badMathOpr(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isInt() || !rType->isInt()) {
-			ta->badMathOpd(myExp1->getLine(), myExp1->getCol());
+			ta->badMathOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(INT));
@@ -314,10 +314,10 @@ namespace lake{
 		if(lType->asError() || rType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isInt() && !rType->isInt()) {
-			ta->badMathOpr(myExp1->getLine(), myExp1->getCol());
+			ta->badMathOpr(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isInt() || !rType->isInt()) {
-			ta->badMathOpd(myExp1->getLine(), myExp1->getCol());
+			ta->badMathOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(INT));
@@ -334,7 +334,7 @@ namespace lake{
 		if(lType->asError() || rType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isBool() || !rType->isBool()) {
-			ta->badLogicOpd(myExp1->getLine(), myExp1->getCol());
+			ta->badLogicOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(BOOL));
@@ -351,7 +351,7 @@ namespace lake{
 		if(lType->asError() || rType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isBool() || !rType->isBool()) {
-			ta->badLogicOpd(myExp1->getLine(), myExp1->getCol());
+			ta->badLogicOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(BOOL));
@@ -368,10 +368,10 @@ namespace lake{
 		if(lType->asError() || rType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(lType->asFn() || rType->asFn()) {
-			ta->badEqOpd(myExp1->getLine(), myExp1->getCol());
+			ta->badEqOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else if(lType != rType) {
-			ta->badEqOpr(myExp1->getLine(), myExp1->getCol());
+			ta->badEqOpr(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(BOOL));
@@ -388,10 +388,10 @@ namespace lake{
 		if(lType->asError() || rType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(lType->asFn() || rType->asFn()) {
-			ta->badEqOpd(myExp1->getLine(), myExp1->getCol());
+			ta->badEqOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else if(lType != rType) {
-			ta->badEqOpr(myExp1->getLine(), myExp1->getCol());
+			ta->badEqOpr(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(BOOL));
@@ -408,7 +408,7 @@ namespace lake{
 		if(lType->asError() || rType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isInt() || !rType->isInt()) {
-			ta->badRelOpd(myExp1->getLine(), myExp1->getCol());
+			ta->badRelOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(BOOL));
@@ -425,7 +425,7 @@ namespace lake{
 		if(lType->asError() || rType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isInt() || !rType->isInt()) {
-			ta->badRelOpd(myExp1->getLine(), myExp1->getCol());
+			ta->badRelOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(BOOL));
@@ -442,7 +442,7 @@ namespace lake{
 		if(lType->asError() || rType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isInt() || !rType->isInt()) {
-			ta->badRelOpd(myExp1->getLine(), myExp1->getCol());
+			ta->badRelOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(BOOL));
@@ -459,7 +459,7 @@ namespace lake{
 		if(lType->asError() || rType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!lType->isInt() || !rType->isInt()) {
-			ta->badRelOpd(myExp1->getLine(), myExp1->getCol());
+			ta->badRelOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(BOOL));
@@ -474,7 +474,7 @@ namespace lake{
 		if(type->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!type->isBool()) {
-			ta->badLogicOpd(myExp->getLine(), myExp->getCol());
+			ta->badLogicOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(BOOL));
@@ -489,7 +489,7 @@ namespace lake{
 		if(type->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!type->isInt()) {
-			ta->badRelOpd(myExp->getLine(), myExp->getCol());
+			ta->badRelOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(BOOL));
@@ -504,7 +504,7 @@ namespace lake{
 		if(type->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(!type->isInt()) {
-			ta->badRelOpd(myExp->getLine(), myExp->getCol());
+			ta->badRelOpd(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(BOOL));
@@ -519,10 +519,10 @@ namespace lake{
 		if(type->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(type->isPtr()) {
-			ta->badReadPtr(myExp->getLine(), myExp->getCol());
+			ta->badReadPtr(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else if(type->asFn()) {
-			ta->readFn(myExp->getLine(), myExp->getCol());
+			ta->readFn(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(VOID));
@@ -537,13 +537,13 @@ namespace lake{
 		if(type->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(type->isPtr()) {
-			ta->writePtr(myExp->getLine(), myExp->getCol());
+			ta->writePtr(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else if(type->isVoid()) {
-			ta->badWriteVoid(myExp->getLine(), myExp->getCol());
+			ta->badWriteVoid(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else if(type->asFn()) {
-			ta->writeFn(myExp->getLine(), myExp->getCol());
+			ta->writeFn(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		}else {
 			ta->nodeType(this, VarType::produce(VOID));
@@ -562,7 +562,7 @@ namespace lake{
 		if(condType->asError() || myStmtsType->asError() || myDeclsType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(condType->isBool()) {
-			ta->badIfCond(myExp->getLine(), myExp->getCol());
+			ta->badIfCond(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(VOID));
@@ -587,7 +587,7 @@ namespace lake{
 			|| myDeclsTypeT->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(condType->isBool()) {
-			ta->badIfCond(myExp->getLine(), myExp->getCol());
+			ta->badIfCond(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(VOID));
@@ -606,7 +606,7 @@ namespace lake{
 		if(condType->asError() || myStmtsType->asError() || myDeclsType->asError()) {
 			ta->nodeType(this, ErrorType::produce());
 		} else if(condType->isBool()) {
-			ta->badWhileCond(myExp->getLine(), myExp->getCol());
+			ta->badWhileCond(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
 			ta->nodeType(this, VarType::produce(VOID));
@@ -649,10 +649,17 @@ namespace lake{
 		myExp->typeAnalysis(ta);
 
 		const DataType * type = ta->nodeType(myExp);
+		const DataType * retType = fnType->getReturnType();
 
 		if(type->asError()) {
 			ta->nodeType(this, ErrorType::produce());
-		} else if(type != fnType->getReturnType()) {
+		} else if(retType->isVoid() && !type->isVoid) {
+			ta->extraRetValue(this->getLine(), this->getCol());
+			ta->nodeType(this, ErrorType::produce());
+		} else if(!retType->isVoid() && type->isVoid) {
+			ta->badNoRet(this->getLine(), this->getCol());
+			ta->nodeType(this, ErrorType::produce());
+		} else if(type != retType) {
 			ta->badRetValue(this->getLine(), this->getCol());
 			ta->nodeType(this, ErrorType::produce());
 		} else {
