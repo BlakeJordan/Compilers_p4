@@ -1,4 +1,4 @@
-7,11: Arithmetic operator applied to incompatible operands
-7,7: Invalid assignment operation
-8,5: Bad return value
+7,9: Arithmetic operator applied to invalid operand
+7,13: Arithmetic operator applied to invalid operand
+8,12: Bad return value
 Type checking failed

@@ -1,0 +1,14 @@
+2,5: Missing return value
+7,9: Invalid assignment operand
+20,7: Invalid assignment operation
+21,7: Invalid assignment operation
+24,7: Invalid assignment operation
+25,9: Arithmetic operator applied to invalid operand
+27,7: Invalid assignment operation
+35,5: Function call with wrong number of args
+37,5: Function call with wrong number of args
+38,5: Function call with wrong number of args
+39,11: Attempt to write a raw pointer
+40,10: Attempt to read a raw pointer
+43,12: Bad return value
+Type checking failed

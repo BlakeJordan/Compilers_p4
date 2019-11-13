@@ -1,0 +1,44 @@
+int g(bool a) {
+    return;
+}
+
+int f() {
+    bool a;
+    a = g;
+}
+
+void foo() {
+    return;
+}
+
+int main() {
+    int c;
+    int a;
+    int b;
+    bool d;
+    int @ z;
+    z = true;
+    z = 1;
+    b = 1;
+    a = 2;
+    c = foo();
+    c = d * b;
+    c = a/b;
+    d = a + b;
+    d = true;
+    d = false;
+    d = a < b;
+    d = a > b;
+    d = a <= b;
+    d = a >= b;
+    f();
+    f(45, true);
+    g(d);
+    g();
+    g(45, true);
+    write z;
+    read z;
+    d = b == c;
+    d = a != c;
+    return true;
+}
